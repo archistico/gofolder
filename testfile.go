@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	//"bufio"
 	"fmt"
 	"math"
 	"os"
@@ -61,9 +60,9 @@ func (c *Cartelle) Crea() {
 		for _, d := range c.lista {
 			err := d.Write()
 			if err != nil {
-				fmt.Println("Errore: ", d.GetIndirizzo())
+				fmt.Println("Errore:", d.GetIndirizzo())
 			} else {
-				fmt.Println("Creata: ", d.GetIndirizzo())
+				fmt.Println("Creata:", d.GetIndirizzo())
 			}
 		}
 	} else {
@@ -92,9 +91,6 @@ func (c *Cartelle) Analizza() {
 		numTab = Tab(testo)
 		r := strings.NewReplacer("\t", "")
 		dirTesto = r.Replace(testo)
-
-		// Parametri
-		//fmt.Printf("%10s|numTab:%3d|numTabLast:%3d \n", dirTesto, numTab, numTabLast)
 
 		// Directory nella cartella principale
 		if numTab == 0 {
@@ -158,43 +154,8 @@ func main() {
 
 	// Principale
 	cartelle:=Cartelle{}
-	//cartelle.testo = []string{"Prima", "Seconda", "\tSeconda.1", "\tSeconda.2", "\t\tSeconda.21", "\tSeconda.3", "Quarta", "Quinta", "\tQuinta.1"}
 	cartelle.testo = directories
 	cartelle.Analizza()
-
-	//cartelle.Mostra()
 	cartelle.Crea()
-
-	/*
-	// SCRIVERE
-	f, err := os.Create("prova.txt")
-	check(err)
-	defer f.Close()
-
-	n3, err := f.WriteString("Prima\nSeconda\n")
-	fmt.Printf("Scritti %d bytes\n", n3)
-	f.Sync()
-
-
-	// LEGGERE
-	file, err := os.Open("lista.txt")
-	check(err)
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-
-	for scanner.Scan() {
-		cont++
-		path := scanner.Text()
-		fmt.Printf("(%d) Creata cartella: %s\n", cont, path)
-
-		if _, err := os.Stat(path); os.IsNotExist(err) {
-			// Se non è stato trovato la crei
-			//err := os.Mkdir(scanner.Text(), os.ModeDir)
-			fmt.Println(err)
-		}
-	}
-	*/
-
 }
 
