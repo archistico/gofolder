@@ -11,4 +11,7 @@ Second
 [Tab] Third  
 
 * go build gofolder.go  
-* ./gofolder.exe
+* gofolder -h
+* gofolder -show
+* gofolder -make
+* gofolder -file=test.txt
