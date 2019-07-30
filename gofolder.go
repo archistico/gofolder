@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"math"
 	"os"
@@ -16,7 +17,7 @@ func check(e error) {
 }
 
 type Cartella struct {
-	Indirizzo	string
+	Indirizzo string
 }
 
 func (c *Cartella) GetIndirizzo() string {
@@ -31,7 +32,7 @@ func (c *Cartella) Write() error {
 		errMake := os.Mkdir(c.Indirizzo, os.ModeDir)
 
 		// se errore nella creazione della cartella
-		if errMake!=nil {
+		if errMake != nil {
 			return nil
 		} else {
 			return errMake
@@ -48,7 +49,7 @@ type Cartelle struct {
 func (c *Cartelle) Mostra() {
 	if len(c.lista) > 0 {
 		for i, element := range c.lista {
-			fmt.Printf("(%d) %s\n", i, element.Indirizzo)
+			fmt.Printf("(%3d) %s\n", i, element.Indirizzo)
 		}
 	} else {
 		fmt.Println("Nessuna directory")
@@ -122,18 +123,17 @@ func (c *Cartelle) Analizza() {
 		}
 
 		// Concatena genitori per aggiungere alla lista cartelle
-		if len(livelloGenitore)>0 {
+		if len(livelloGenitore) > 0 {
 			indirizzo = ""
 			for _, d := range livelloGenitore {
 				indirizzo += d + string(filepath.Separator)
 			}
-			temp := Cartella{ Indirizzo: indirizzo}
+			temp := Cartella{Indirizzo: indirizzo}
 			c.Add(&temp)
 		}
 		numTabLast = numTab
 	}
 }
-
 
 func Tab(text string) int {
 	return strings.Count(text, "\t")
@@ -141,9 +141,18 @@ func Tab(text string) int {
 
 func main() {
 
+	showPtr := flag.Bool("show", false, "Only show folder (not write on disk)")
+	makePtr := flag.Bool("make", false, "Make folder")
+	filePtr := flag.String("file", "lista.txt", "Text file with folder structure -file=name.txt")
+
+	flag.Parse()
+
 	// LEGGERE
-	file, err := os.Open("lista.txt")
-	check(err)
+	file, err := os.Open(*filePtr)
+	if err != nil {
+		fmt.Println("File non trovato")
+		os.Exit(3)
+	}
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
@@ -153,9 +162,19 @@ func main() {
 	}
 
 	// Principale
-	cartelle:=Cartelle{}
+	cartelle := Cartelle{}
 	cartelle.testo = directories
 	cartelle.Analizza()
-	cartelle.Crea()
-}
 
+	if *showPtr {
+		cartelle.Mostra()
+	}
+
+	if *makePtr {
+		cartelle.Crea()
+	}
+
+	if !*showPtr && !*makePtr {
+		fmt.Println("Execute 'gofolder -h' for help")
+	}
+}
