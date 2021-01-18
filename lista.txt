@@ -1,12 +1,33 @@
-Prima
-Seconda
-	Seconda.1
-	Seconda.2
-		Seconda.2.1
-	Seconda.3
-Terza
-Quarta
-	Quarta.1
-	Quarta.2
-	Quarta.3
-Quinta
+1 trimestre - Gennaio Febbraio Marzo
+    Cedolini dottoressa
+    Cedolini segretaria
+    Certificazioni uniche
+    Fatture emesse
+    Ricevute bonifici-F24
+    Spese
+    Inviato commercialista
+2 trimestre - Aprile Maggio Giugno
+    Cedolini dottoressa
+    Cedolini segretaria
+    Certificazioni uniche
+    Fatture emesse
+    Ricevute bonifici-F24
+    Spese
+    Inviato commercialista
+3 trimestre - Luglio Agosto Settembre
+    Cedolini dottoressa
+    Cedolini segretaria
+    Certificazioni uniche
+    Fatture emesse
+    Ricevute bonifici-F24
+    Spese
+    Inviato commercialista
+4 trimestre - Ottobre Novembre Dicembre
+    Cedolini dottoressa
+    Cedolini segretaria
+    Certificazioni uniche
+    Fatture emesse
+    Ricevute bonifici-F24
+    Spese
+    Inviato commercialista
+Export Cloudfinance
